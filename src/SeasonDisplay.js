@@ -3,7 +3,7 @@ const SeasonDisplay = () => {
         <div>
             <h1>SeasonDisplay</h1>
         </div>
-     );
+    );
 }
- 
+
 export default SeasonDisplay;

@@ -4,6 +4,8 @@ import React from 'react'
 // must extend subclass -> extends React.Component
 // must define render that return JSX
 class App extends React.Component{
+
+  // render method inside the component is called frequently
   render(){
     window.navigator.geolocation.getCurrentPosition(
     ( position ) => { console.log( position )},

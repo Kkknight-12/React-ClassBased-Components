@@ -9,7 +9,7 @@ class App extends Component{
 
       // state must be assigned with name state
       // can't assgin state by any other name
-      this.state = { lat: null };
+      this.state = { lat: null, errorMessage: '' };
 
       // this will run when we create instance
       window.navigator.geolocation.getCurrentPosition(
@@ -19,7 +19,7 @@ class App extends Component{
         // this call-back will take some time to run, run after fetching position.
         this.setState( { lat: position.coords.latitude });
       },
-      ( err ) => console.log( err )
+      ( err ) => this.setState( { errorMessage: err.message } )
     )
   }
 
@@ -27,13 +27,36 @@ class App extends Component{
   // react will re-render the component anytime you update the state object
   // render will run second time to update the postion on screen
   render(){
-  return (
-    <div className="App">
-      <SeasonDisplay>
-      <div>Latitude: {this.state.lat}</div>
-      </SeasonDisplay>
-    </div>
-  );
+
+    if( this.state.errorMessage && !this.state.lat ){
+      return (
+        <div className="App">
+          <SeasonDisplay>
+            <div>Error: {this.state.errorMessage}</div>
+          </SeasonDisplay>
+        </div>
+      )
+    }
+
+    if( !this.state.errorMessage && this.state.lat ){
+      return (
+        <div className="App">
+          <SeasonDisplay>
+            <div>Latitude: {this.state.lat}</div>
+          </SeasonDisplay>
+        </div>
+      )
+    }
+    
+    return (
+      <div className="App">
+            <SeasonDisplay>
+              <div>
+                <h1> Loading....</h1>
+              </div>
+            </SeasonDisplay>
+      </div>
+    )
   }
 }
 

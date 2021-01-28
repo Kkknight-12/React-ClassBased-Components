@@ -1,7 +1,7 @@
-const SeasonDisplay = () => {
+const SeasonDisplay = (props) => {
     return ( 
         <div>
-            <h1>SeasonDisplay</h1>
+            <h1>{props.children}</h1>
         </div>
     );
 }
